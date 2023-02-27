@@ -3,7 +3,7 @@ var users_data = {};
 function Get_data(){
     var xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'https://taabackend.azurewebsites.net/users', false);
+    xhr.open('GET', 'https://twitaa-backend.azurewebsites.net/users', false);
 
     xhr.onload = function () {
         if (xhr.status === 200) {

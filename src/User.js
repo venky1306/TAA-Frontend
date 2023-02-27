@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import Tweet from './Tweet';
 import SentiResults from './SentiResults';
+import FollowersChart from './FollowersChart';
 import React from 'react';
 
 var tweets = {};
@@ -20,7 +21,7 @@ export default function User(props){
     // console.log(user_id)
     var xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'https://taabackend.azurewebsites.net/user_info', false);
+    xhr.open('POST', 'https://twitaa-backend.azurewebsites.net/user_info', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function() {
     if (xhr.status === 200) {
@@ -54,7 +55,7 @@ export default function User(props){
         }
         var xhr1 = new XMLHttpRequest();
 
-        xhr1.open('POST', 'https://taabackend.azurewebsites.net/sentiment', false);
+        xhr1.open('POST', 'https://twitaa-backend.azurewebsites.net/sentiment', false);
         xhr1.setRequestHeader('Content-Type', 'application/json');
         xhr1.onreadystatechange = function() {
         if (xhr1.status === 200) {
@@ -80,6 +81,8 @@ export default function User(props){
         <div className="bg-gray-200 h-full">
         <div className="mx-auto max-w-2xl py-8 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="grid grid-cols-1 mt-3 gap-y-10 gap-x-6 ">
+
+                {/* Profile Overview Section */}
 
                 <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-white xl:aspect-w-7 xl:aspect-h-8">
                     <div className="flex ">
@@ -168,7 +171,11 @@ export default function User(props){
                         
                     </div>
                 </div>
+                {/* Followers Chart Section */}
+                <FollowersChart user_name={tweets.includes.users[0].username} />
 
+                {/* Recent Tweets Section  */}
+                
                 <div className='bg-white rounded-lg'>
                     <div className='mt-6 text-center text-3xl font-semibold'>Recent Tweets</div>
                     <div className="flex flex-wrap justify-center gap-10  rounded-lg py-7">
@@ -178,6 +185,8 @@ export default function User(props){
                     
                     </div>
                 </div>
+
+                {/* Sentiment Analysis Section */}
 
                 <div className='bg-white rounded-lg flex p-4'>
                     <div className='w-1/2 border-r-2 border-sky-100 '>
@@ -196,6 +205,7 @@ export default function User(props){
                         </div>
                     
                     </div>
+
                     <div className='w-1/2 flex flex-col'>
                         <div className='flex'>
                             <div className='text-3xl ml-3 w-4/6'>Results</div>
